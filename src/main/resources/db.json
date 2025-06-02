@@ -1,0 +1,64 @@
+{
+    "users": [
+        {
+            "name": "João Silva",
+            "email": "joao.silva@email.com",
+            "password": "J@o2024",
+            "dateOfBirth": "1990-05-15"
+        },
+        {
+            "name": "Maria Oliveira",
+            "email": "maria.oliveira@email.com",
+            "password": "M@r2024",
+            "dateOfBirth": "1988-11-23"
+        },
+        {
+            "name": "Pedro Santos",
+            "email": "pedro.santos@email.com",
+            "password": "P@d2024",
+            "dateOfBirth": "1995-03-07"
+        },
+        {
+            "name": "Ana Costa",
+            "email": "ana.costa@email.com",
+            "password": "A@n2024",
+            "dateOfBirth": "1992-08-30"
+        },
+        {
+            "name": "Lucas Ferreira",
+            "email": "lucas.ferreira@email.com",
+            "password": "L@c2024",
+            "dateOfBirth": "1985-12-12"
+        },
+        {
+            "name": "Julia Lima",
+            "email": "julia.lima@email.com",
+            "password": "J@l2024",
+            "dateOfBirth": "1998-07-25"
+        },
+        {
+            "name": "Rafael Souza",
+            "email": "rafael.souza@email.com",
+            "password": "R@f2024",
+            "dateOfBirth": "1993-04-18"
+        },
+        {
+            "name": "Beatriz Alves",
+            "email": "beatriz.alves@email.com",
+            "password": "B@t2024",
+            "dateOfBirth": "1991-09-03"
+        },
+        {
+            "name": "Gabriel Martins",
+            "email": "gabriel.martins@email.com",
+            "password": "G@b2024",
+            "dateOfBirth": "1987-06-20"
+        },
+        {
+            "name": "Isabela Pereira",
+            "email": "isabela.pereira@email.com",
+            "password": "I@s2024",
+            "dateOfBirth": "1996-01-14"
+        }
+    ]
+}
