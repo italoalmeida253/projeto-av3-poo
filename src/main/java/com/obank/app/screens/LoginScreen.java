@@ -9,9 +9,14 @@ import com.obank.app.elements.ButtonElement;
 import com.obank.app.elements.LabelElement;
 import com.obank.app.elements.PasswordTextField;
 import com.obank.app.elements.TextFieldElement;
+import com.obank.app.repositories.UserRepository;
 
 public class LoginScreen extends JFrame {
-    public LoginScreen() {
+    private UserRepository userRepository;
+
+    public LoginScreen(UserRepository userRepository) {
+        this.userRepository = userRepository;
+
         this.setSize(300, 500);
 
         JPanel panel = new JPanel();
@@ -31,6 +36,7 @@ public class LoginScreen extends JFrame {
         emailTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitButtonElement.setAlignmentX(Component.CENTER_ALIGNMENT);
+        submitButtonElement.addActionListener(e -> onSubmit());
 
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
@@ -41,5 +47,13 @@ public class LoginScreen extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 8)));
         panel.add(submitButtonElement);
         panel.add(Box.createVerticalGlue());
+    }
+
+    private void onSubmit() {
+        try {
+            userRepository.findByEmail("email teste");
+        } catch (Exception e) {
+            return;
+        }
     }
 }
