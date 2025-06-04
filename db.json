@@ -1,6 +1,12 @@
 {
     "users": [
         {
+            "name": "Italo Almeida",
+            "email": "italo@gmail.com",
+            "password": "poiqwe",
+            "dateOfBirth": "1990-05-15"
+        },
+        {
             "name": "João Silva",
             "email": "joao.silva@email.com",
             "password": "J@o2024",

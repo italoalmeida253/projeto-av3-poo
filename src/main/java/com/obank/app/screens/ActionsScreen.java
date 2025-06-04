@@ -8,10 +8,14 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.obank.app.constants.Constants;
 import com.obank.app.elements.ButtonElement;
 import com.obank.app.elements.LabelElement;
+import com.obank.app.repositories.implementations.UserRepositoryJSON;
+
 public class ActionsScreen extends JFrame {
     public ActionsScreen() {
         this.setSize(800, 600);
@@ -30,7 +34,9 @@ public class ActionsScreen extends JFrame {
         ButtonElement extractButtonElement = new ButtonElement("Extrato");
         ButtonElement changePasswordButtonElement = new ButtonElement("Mudar senha");
         ButtonElement exitButtonElement = new ButtonElement("Sair");
-        
+
+        exitButtonElement.addActionListener(e -> onLogoutClick());
+
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         gridPanel.add(depositButtonElement);
@@ -45,5 +51,25 @@ public class ActionsScreen extends JFrame {
         mainPanel.add(gridPanel);
 
         this.add(mainPanel);
+    }
+
+    void onLogoutClick() {
+        int logoutConfirmed = JOptionPane.showOptionDialog(rootPane, "Tem certeza que deseja sair da sua conta?",
+                "Sair",
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+
+        switch (logoutConfirmed) {
+            case JOptionPane.YES_OPTION:
+                Constants.authenticated = false;
+                
+                this.setVisible(false);
+
+                LoginScreen loginScreen = new LoginScreen(new UserRepositoryJSON());
+                loginScreen.setVisible(true);
+                break;
+        
+            case JOptionPane.NO_OPTION:
+                break;
+        }
     }
 }

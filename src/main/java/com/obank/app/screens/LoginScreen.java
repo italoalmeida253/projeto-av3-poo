@@ -5,10 +5,12 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import com.obank.app.constants.Constants;
 import com.obank.app.elements.ButtonElement;
 import com.obank.app.elements.LabelElement;
 import com.obank.app.elements.PasswordTextField;
 import com.obank.app.elements.TextFieldElement;
+import com.obank.app.models.User;
 import com.obank.app.repositories.UserRepository;
 
 public class LoginScreen extends JFrame {
@@ -36,7 +38,8 @@ public class LoginScreen extends JFrame {
         emailTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         passwordTextField.setAlignmentX(Component.CENTER_ALIGNMENT);
         submitButtonElement.setAlignmentX(Component.CENTER_ALIGNMENT);
-        submitButtonElement.addActionListener(e -> onSubmit());
+        submitButtonElement
+                .addActionListener(e -> onSubmit(emailTextField.getText(), passwordTextField.getPassword()));
 
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
@@ -49,11 +52,30 @@ public class LoginScreen extends JFrame {
         panel.add(Box.createVerticalGlue());
     }
 
-    private void onSubmit() {
+    private void onSubmit(String email, char[] password) {
         try {
-            userRepository.findByEmail("email teste");
-        } catch (Exception e) {
-            return;
+            User user = userRepository.findByEmail(email);
+            String passwordString = "";
+
+            for (char letter : password) {
+                passwordString += letter;
+            }
+
+            if (!user.getPassword().equals(passwordString)) {
+                JOptionPane.showMessageDialog(rootPane,
+                        "A senha que você digitou é diferente da cadastrada no sistema. Tente novamente.",
+                        "Senha incorreta", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Constants.authenticated = true;
+            this.setVisible(false);
+            ActionsScreen actionsScreen = new ActionsScreen();
+            actionsScreen.setVisible(true);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(rootPane,
+                    e.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
