@@ -7,9 +7,10 @@ import com.obank.app.repositories.UserRepository;
 import com.google.gson.*;
 
 public class UserRepositoryJSON implements UserRepository {
+    private Gson gson = new Gson();
+
     @Override
     public User findByEmail(String email) {
-        Gson gson = new Gson();
         Database database = gson.fromJson(JSONDatabase.getDatabaseDataAsString(), Database.class);
 
         User foundUser = null;
@@ -25,5 +26,34 @@ public class UserRepositoryJSON implements UserRepository {
         }
 
         return foundUser;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        Database database = gson.fromJson(JSONDatabase.getDatabaseDataAsString(), Database.class);
+
+        database.users.removeIf(u -> u.getEmail().equals(user.getEmail()));
+        database.users.add(user);
+
+        JSONDatabase.saveDatabaseData(gson.toJson(database));
+    }
+
+    @Override
+    public void createUser(User user) {
+        Database database = gson.fromJson(JSONDatabase.getDatabaseDataAsString(), Database.class);
+
+        database.users.add(user);
+
+        JSONDatabase.saveDatabaseData(gson.toJson(database));
+    }
+
+    @Override
+    public boolean checkIfUserExists(String email) {
+        try {
+            findByEmail(email);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
